@@ -14,11 +14,13 @@
 <body>
   <div class="container" id="main-body">
     <h1 class="header">Grocery List</h1>
-    <form class="intake">
-      <input type="text" id="item-name" placeholder="Item Name">
-      <button type="submit" id="submit-button" class="btn btn-submit">SUBMIT</button>
+    <form id="intake" class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control" id="item" placeholder="Type Here" required>
+      </div>
+      <button type="submit" id="submit-button" class="btn btn-info">SUBMIT</button>
     </form>
-    <ul id="the-list">
+    <ul id="theList">
     </ul>
   </div>
 </body>
