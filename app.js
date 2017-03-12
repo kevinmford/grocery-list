@@ -11,22 +11,25 @@ $(document).ready(function(){
     addItem(item);
   });
 
-  function addItem(item){
+  function addItem(text){
+    var item = {text : text, checked : false}
     groceryItems.push(item);
-    renderList(groceryItems);
+    renderList();
   }
 
-  function renderList(groceryItems){
+  function renderList(){
     var html = "";
     for(var i = 0; i < groceryItems.length; i++){
-      html += "<li data-index-number='" + i + "'>" + groceryItems[i] + "<button class='btn btn-danger deleteButtons'>Delete</button></li>";
+      html += "<li data-index-number='" + i + "'>" + groceryItems[i].text + "<button class='btn btn-xs btn-danger deleteButton pull-right'>Delete</button></li>";
     }
     $("#theList").html(html);
   }
 
-  $('.removeButton').click(function () {
-        $(this).parent().remove();
-    });
+  $(document).on("click", ".deleteButton", function () {
+    var item = parseInt($(this).parent().attr("data-index-number"));
+    groceryItems.splice(item, 1);
+    renderList();
+  });
 
 
 });
