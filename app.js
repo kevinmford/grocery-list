@@ -19,8 +19,14 @@ $(document).ready(function(){
   function renderList(groceryItems){
     var html = "";
     for(var i = 0; i < groceryItems.length; i++){
-      html += "<li>" + groceryItems[i] + "</li>";
+      html += "<li data-index-number='" + i + "'>" + groceryItems[i] + "<button class='btn btn-danger deleteButtons'>Delete</button></li>";
     }
     $("#theList").html(html);
   }
+
+  $('.removeButton').click(function () {
+        $(this).parent().remove();
+    });
+
+
 });
