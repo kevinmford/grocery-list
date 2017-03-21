@@ -27,6 +27,13 @@ $(document).ready(function(){
       }
       html +=` data-index-number= ${i}> ${groceryItems[i].text}<div class="pull-right">` +
       `<button class="btn btn-xs btn-primary fa fa-pencil edit" data-toggle="modal" data-target="#editBox"></button>`+
+      `<div class="modal fade"  id="editBox" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none">` +
+        `<div class="modal-dialog modal-sm" role="document">` +
+          `<div class="modal-content">` +
+            `...` +
+          `</div>` +
+        `</div>` +
+      `</div>` +
       `<button class="btn btn-xs btn-info fa fa-check-circle-o check"></button>` +
       `<button class="btn btn-xs btn-danger fa fa-times-circle delete"></button></div></li></div>`;
     }
