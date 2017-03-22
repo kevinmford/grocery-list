@@ -25,17 +25,18 @@ $(document).ready(function(){
       if (groceryItems[i].checked){
         html += " class= 'checked'";
       }
-      html +=` data-index-number= ${i}> ${groceryItems[i].text}<div class="pull-right">` +
-      `<button class="btn btn-xs btn-primary fa fa-pencil edit" data-toggle="modal" data-target="#editBox"></button>`+
-      `<div class="modal fade"  id="editBox" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none">` +
+      html +=` data-index= ${i}> ${groceryItems[i].text}<div class="pull-right">` +
+      `<button class="btn btn-xs btn-primary fa fa-pencil edit" data-toggle="modal" data-target="#editBox${i}"></button>`+
+      `<div class="modal fade" id="editBox${i}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none">` +
         `<div class="modal-dialog modal-sm" role="document">` +
           `<div class="modal-content">` +
             `<div class="modal-header">` +
               `<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>` +
-              `<h4 class="modal-title" id="mySmallModalLabel">Small modal</h4>`
+              `<h4 class="modal-title" id="mySmallModalLabel">Small modal</h4>` +
             `</div>` +
             `<div class="modal-body">` +
-              `<p> Hello World </p>` +
+              `<input type="text" data-index="${i}" value="${groceryItems[i].text}">` +
+              `<button class="editSubmit close" data-dismiss="modal">Submit</button>` +
             `</div>` +
           `</div>` +
         `</div>` +
@@ -49,16 +50,22 @@ $(document).ready(function(){
   }
 
   $(document).on("click", ".delete", function () {
-    var item = parseInt($(this).parent().parent().attr("data-index-number"));
+    var item = parseInt($(this).parent().parent().attr("data-index"));
     groceryItems.splice(item, 1);
     renderList();
   });
 
-   $(document).on("click", ".check", function () {
-    var item = parseInt($(this).parent().parent().attr("data-index-number"));
+  $(document).on("click", ".check", function () {
+    var item = parseInt($(this).parent().parent().attr("data-index"));
     groceryItems[item].checked = !groceryItems[item].checked;
     renderList();
   });
 
+  $(document).on("click", ".editSubmit", function () {
+    var text = $(this).prev().val();
+    var item = parseInt($(this).prev().attr("data-index"));
+    groceryItems[item].text = text;
+    renderList();
+  });
 
 });
