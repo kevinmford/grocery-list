@@ -18,7 +18,6 @@ $(document).ready(function(){
   }
 
   function renderList(){
-    console.log(groceryItems)
     var html = "";
     for(var i = 0; i < groceryItems.length; i++){
       html += `<div class="row"><li`
@@ -36,7 +35,7 @@ $(document).ready(function(){
             `</div>` +
             `<div class="modal-body">` +
               `<input type="text" data-index="${i}" value="${groceryItems[i].text}">` +
-              `<button class="editSubmit close" data-dismiss="modal">Submit</button>` +
+              `<button type="button" class="editSubmit close" data-dismiss="modal">Submit</button>` +
             `</div>` +
           `</div>` +
         `</div>` +
@@ -45,8 +44,6 @@ $(document).ready(function(){
       `<button class="btn btn-xs btn-danger fa fa-times-circle delete"></button></div></li></div>`;
     }
     $("#theList").html(html);
-    // if item is checked create checked class
-    // lookup es6 interpolation
   }
 
   $(document).on("click", ".delete", function () {
@@ -66,6 +63,8 @@ $(document).ready(function(){
     var item = parseInt($(this).prev().attr("data-index"));
     groceryItems[item].text = text;
     renderList();
+    var selector = `#editBox${item}`;
+    $(selector).modal('hide');
   });
 
 });
